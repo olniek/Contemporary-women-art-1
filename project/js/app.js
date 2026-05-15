@@ -442,7 +442,7 @@ function render() {
           <div class="landing">
             <div class="landing-hero">
               <div class="landing-copy">
-                <p class="landing-kicker">A feminist learning room</p>
+                <p class="landing-kicker">✦ feminist art club</p>
                 <h1 class="landing-title" id="view-title" tabindex="-1" aria-label="Learn contemporary art through women artists">
                   <span class="landing-title-line">Learn contemporary art</span>
                   <span class="landing-title-line landing-title-line--emph">through women artists</span>
