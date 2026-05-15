@@ -2,7 +2,7 @@
   "name": "cursor-art-learning",
   "private": true,
   "scripts": {
-    "postinstall": "env -u PLAYWRIGHT_BROWSERS_PATH playwright install chromium",
+    "postinstall": "node scripts/postinstall.mjs",
     "test": "env -u PLAYWRIGHT_BROWSERS_PATH playwright test"
   },
   "devDependencies": {

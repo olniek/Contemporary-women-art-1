@@ -149,6 +149,12 @@ Alternative: `npx --yes serve .` from the same root, then open `/project/index.h
 
 Use `http://` (not `file://`) when checking asset loading.
 
+## Deploy on Vercel
+
+1. Import [Contemporary-women-art-1](https://github.com/olniek/Contemporary-women-art-1) and leave **Root Directory** empty (repository root, not `project/`). `images/` must sit beside `project/` so `../images/...` paths resolve.
+2. Framework preset: **Other** (no build). Root [`vercel.json`](../../vercel.json) sets `outputDirectory` to `.` and rewrites `/` → `/project/index.html`.
+3. Production URL: open the deployment root or `/project/index.html` directly.
+
 ## Share / SEO (`<head>`)
 
 - The page includes `meta description` and Open Graph tags. **`og:url` and `og:image` use root-relative paths** (`/project/index.html`, `/images/francesca-woodman-card.png`) so crawlers resolve them against the **same origin** as the shared link. If you deploy behind an unusual base path or CDN that does not treat those as site-root paths, replace them in [`project/index.html`](../index.html) with full `https://…` URLs for your host.
