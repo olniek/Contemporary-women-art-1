@@ -1,0 +1,63 @@
+---
+description: >-
+  When implementing work from project/tasks/, follow these engineering rules
+  (derived from task acceptance criteria).
+alwaysApply: true
+---
+
+# Project tasks — implementation rules
+
+Source of truth: [project/tasks/README.md](project/tasks/README.md), then the task file under [project/tasks/release-0/](project/tasks/release-0/) (shipped baseline, tasks 00–13) or [project/tasks/release-1/](project/tasks/release-1/) (active follow-ups). When implementing a task, read that file’s acceptance criteria and satisfy them; use this rule as a cross-task checklist for Release 0 expectations.
+
+## Workflow and sequencing
+
+- **Baseline (Task 00):** Before or alongside behavior changes, exercise the happy path in [project/docs/screens.md](project/docs/screens.md) and record edge cases (back from topic grid, empty favorites, quiz Next with no selection, hard refresh). Note asset loading for the real serve method (static server vs `file://`). Record UI vs doc mismatches.
+- **Order:** Prefer completing Task 00 before changing behavior; pair 01–02 and 05–06 for early slices; do 08–09 before or with 12.
+- **Product decisions (Task 03):** Fill the Decision section in the task file; make code, [project/docs/screens.md](project/docs/screens.md), and in-app copy match—no undocumented limitations.
+- **Deferrals:** If something is optional in a task (e.g. live region in 07, CI in 12), record the deferral in that task file or a linked issue—not only in chat.
+
+## Copy and safety (Task 01)
+
+- Remove user-visible dev labels (`Question screen`, `Result screen`, etc.). Match landing voice in [project/index.html](project/index.html).
+- For user- or data-driven strings, keep using `escapeHtml` / `textContent` as appropriate—no XSS regressions.
+
+## Quiz progression (Task 02)
+
+- Implement **one** approach: disable Next until a radio is selected, **or** show inline validation and do not advance, **or** explicit Skip with copy explaining scoring impact.
+- Apply the same behavior to **every** question from `getActiveQuizQuestions()`.
+- Verify keyboard: Tab to radios, Space to select, Enter on primary control.
+
+## State and naming (Task 04)
+
+- Renaming explore/grid state: update **every** read, write, and transition in one coherent change; grep until the old token is gone from code. Clarify in a short comment: series = medium, explore = artwork grid for chosen topic.
+
+## Document structure and a11y (Tasks 05–07)
+
+- One `<main>` for primary content; pick **one** heading pattern (e.g. one `h1` per view **or** `h2` + `aria-labelledby`) and use it consistently. No skipped heading levels for layout-only “titles” that should be headings.
+- After a full `render()` that replaces `#app` content, move focus to a **documented** target (`h1` with `tabindex="-1"` or primary CTA). No focus traps; do not remove focus outlines without an accessible replacement.
+- Flip cards: expose state to assistive tech (`aria-expanded` or equivalent); names/labels reflect flipped state; focus styles match other controls. Optional `aria-live="polite"` for post-answer feedback—if skipped, note it in Task 07 and rely on focus (Task 06).
+
+## Quiz data correctness (Tasks 08–09)
+
+- Document the contract for `getActiveQuizQuestions()` (topic `quiz` vs legacy `questions`) in a comment above the function. “Start over” and entering the quiz must size `answers` with the **same** rules as the active bank (shared helper if possible). Fix off-by-one when legacy length changes.
+- Quiz content must match product mission; topic `quiz` length must match Task 08 rule or update rule and migrate topics. Keep `keyIdeas`, `result`, and `insight` consistent per topic.
+
+## Deploy and assets (Task 10)
+
+- Add `meta description` and Open Graph tags; ensure `og:image` resolves for the real host. Document how to serve the app so image paths work.
+
+## Split monolith (Task 11)
+
+- Extract CSS, JS modules, and data without behavior changes; preserve relative image paths from documented server root. Document serve/build steps if a bundler is added. No scope creep (dependency upgrades, framework migration) unless explicitly requested.
+
+## Automated smoke (Task 12)
+
+- Add or extend tests for landing CTA, navigation to explore grid, and invariant: `getActiveQuizQuestions().length` matches `answers` initialization when entering quiz (or document deferral with issue link). Document the test command; update tests after Task 11 path changes.
+- After task-related changes, run **`npm test` from the workspace root** ([package.json](package.json): Playwright + [playwright.config.ts](playwright.config.ts) with `testDir: project/e2e` and the Python static server).
+- **All** specs must pass: `landing.spec.ts`, `explore-grid.spec.ts`, `quiz-smoke.spec.ts` under [project/e2e/](project/e2e/). If a product change intentionally alters flows or copy, **update the E2E specs in the same change** so the suite stays green.
+- E2E needs **Python 3** (`http.server`) and **Chromium** (project `postinstall`). If `npm test` fails for a missing environment, fix the environment or document the blocker in the task file—do not assume the app is broken.
+
+## Definition of done (all tasks)
+
+- Satisfy the task file’s acceptance criteria; run its “How to test” steps where applicable; avoid new console errors for UI tasks.
+- **E2E:** Full Playwright run (`npm test` from repo root) passes with no failures (or document a deferral in the task file with reason and follow-up, consistent with how optional items are handled elsewhere in the rule).

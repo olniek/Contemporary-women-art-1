@@ -1,0 +1,11 @@
+{
+  "name": "cursor-art-learning",
+  "private": true,
+  "scripts": {
+    "postinstall": "env -u PLAYWRIGHT_BROWSERS_PATH playwright install chromium",
+    "test": "env -u PLAYWRIGHT_BROWSERS_PATH playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}

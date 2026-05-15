@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="520" viewBox="0 0 400 520" role="img" aria-labelledby="title desc">
+  <title id="title">Lorna Simpson study card</title>
+  <desc id="desc">Abstract study card with cropped figure and text blocks.</desc>
+  <rect width="400" height="520" fill="#f1efe9"/>
+  <rect x="44" y="48" width="312" height="424" rx="10" fill="#272727"/>
+  <rect x="84" y="86" width="106" height="270" rx="4" fill="#9a9a92"/>
+  <rect x="206" y="86" width="110" height="270" rx="4" fill="#d8d3c8"/>
+  <circle cx="137" cy="142" r="30" fill="#2f2f2f" opacity="0.65"/>
+  <rect x="80" y="386" width="240" height="10" fill="#f1efe9" opacity="0.72"/>
+  <rect x="80" y="410" width="178" height="10" fill="#f1efe9" opacity="0.72"/>
+  <rect x="80" y="434" width="212" height="10" fill="#f1efe9" opacity="0.72"/>
+</svg>
