@@ -620,7 +620,7 @@ function render() {
             </div>
             <div class="artist-card-footer artist-card-footer--front">
               <div class="artist-name-tag artist-footer-field">
-                <span>${escapeHtml(artistDisplayName(a))}</span>
+                <span title="${dLabel}">${escapeHtml(artistDisplayName(a))}</span>
                 <span class="artist-note-marker${hasNote ? " is-active" : ""}" data-note-marker="${escapeHtml(fid)}" aria-label="${hasNote ? "Notebook entry saved" : ""}" title="${hasNote ? "Notebook entry saved" : ""}" aria-hidden="${hasNote ? "false" : "true"}">✎</span>
               </div>
               <button type="button" class="btn-compare${selectedForCompare ? " is-selected" : ""}" data-compare-id="${escapeHtml(fid)}" aria-pressed="${selectedForCompare ? "true" : "false"}" aria-label="${selectedForCompare ? "Remove" : "Compare"} ${escapeHtml(artistDisplayName(a))}" title="${selectedForCompare ? "Remove from comparison" : "Compare"}">
