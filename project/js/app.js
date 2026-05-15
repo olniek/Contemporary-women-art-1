@@ -45,6 +45,20 @@ function flowStepIndicator(activeStep) {
   return `<div class="flow-stepper" role="group" aria-label="Your progress in this session">${body}</div>`;
 }
 
+/** Decorative SVG per medium; paired with .series-card--{id} in CSS. */
+function seriesIconMarkup(seriesId) {
+  const stroke =
+    'stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"';
+  const icons = {
+    photography: `<svg class="series-card-svg" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="7" y="15" width="34" height="24" rx="5" ${stroke}/><circle cx="24" cy="27" r="7.5" ${stroke}/><path d="M17 15l4-6h6l4 6" ${stroke}/><circle cx="35" cy="19" r="1.5" fill="currentColor" stroke="none"/></svg>`,
+    painting: `<svg class="series-card-svg" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 7c-9.5 0-17 7-17 15.5 0 5.5 3.5 10 9 12.5 1.2.5 2 1.6 2 2.9V40a2 2 0 002 2h12a2 2 0 002-2v-2.1c0-1.3.8-2.4 2-2.9 5.5-2.5 9-7 9-12.5C43 14 35.5 7 24 7z" ${stroke}/><circle cx="17" cy="22" r="2.5" fill="currentColor" stroke="none"/><circle cx="28" cy="18" r="2.5" fill="currentColor" stroke="none"/><circle cx="32" cy="28" r="2.5" fill="currentColor" stroke="none"/></svg>`,
+    sculpture: `<svg class="series-card-svg" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 6l14 8v16l-14 8-14-8V14l14-8z" ${stroke}/><path d="M24 6v16M10 14l14 8 14-8M10 30l14 8 14-8" ${stroke}/></svg>`,
+    performance: `<svg class="series-card-svg" viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="12" r="4" ${stroke}/><path d="M24 16v14M18 22l6-6 6 6M14 38c3-4 7-6 10-6s7 2 10 6" ${stroke}/><path d="M8 38h32" ${stroke}/></svg>`,
+    videoArt: `<svg class="series-card-svg" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="6" y="12" width="36" height="26" rx="4" ${stroke}/><path d="M22 20l12 7-12 7V20z" fill="currentColor" stroke="none"/></svg>`,
+  };
+  return icons[seriesId] || icons.photography;
+}
+
 function artistDisplayName(a) {
   if (!a) return "";
   return a.nameDisplay || a.name;
@@ -473,7 +487,10 @@ function render() {
       .map(
         (s) => `
           <div class="series-card-wrap">
-            <button type="button" class="series-card btn-series" data-series="${escapeHtml(s.id)}"${s.status === "coming-soon" ? " disabled" : ""}>${escapeHtml(s.label)}${s.status === "coming-soon" ? " · Soon" : ""}</button>
+            <button type="button" class="series-card series-card--${escapeHtml(s.id)} btn-series" data-series="${escapeHtml(s.id)}"${s.status === "coming-soon" ? " disabled" : ""}>
+              <span class="series-card-icon">${seriesIconMarkup(s.id)}</span>
+              <span class="series-card-label">${escapeHtml(s.label)}${s.status === "coming-soon" ? '<span class="series-card-soon">Soon</span>' : ""}</span>
+            </button>
             <p class="series-card-blurb">${escapeHtml(s.description)}</p>
           </div>
         `

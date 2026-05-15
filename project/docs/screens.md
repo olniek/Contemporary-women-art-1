@@ -19,7 +19,10 @@ Introduce the product and encourage entry.
 Let user choose a medium.
 
 ### Elements
-- Photography, Painting, Sculpture, Performance, and Video Art — each selectable with a short description
+- Page header: **Choose a medium** + lead line
+- Grid of five medium cards (Photography, Painting, Sculpture, Performance, Video Art)
+- Each card: decorative SVG icon (`.series-card-icon`), label, optional **Soon** badge when disabled, and description blurb below the button
+- Per-medium color via modifier classes (`.series-card--photography`, `--painting`, `--sculpture`, `--performance`, `--videoArt`); icons from `seriesIconMarkup()` in `project/js/app.js`
 
 ---
 
@@ -120,7 +123,7 @@ Let the learner synthesize three works from the topic into a titled mini show wi
 | UX section | In the app today |
 |------------|------------------|
 | Landing | Title, subtitle, example figure (image + sample insight), **Start your first series**. |
-| Series selection | All five media (Photography, Painting, Sculpture, Performance, Video Art) are selectable; each has three topics with five-card grids and dedicated quiz banks. |
+| Series selection | All five media are selectable cards with per-medium icons and gradient fills; responsive grid (2 → 3 → 5 columns). Each medium has three topics with five-card grids and dedicated quiz banks. |
 | Topic selection | One panel per topic (Photography topics use preview images); **Start exploring** → grid. **Back** returns to series selection. |
 | Artwork exploration | Five flip cards in a **grid**; interaction is flip and favorites, not swipe. Each topic chooses its own card set via `artistIndexes`. Card backs show artist, work/study metadata, context, and key insight. **Continue to quiz** unlocks after two flipped cards. |
 | Quiz | Shows **Topic:** line; uses the topic’s `quiz` array when it has **five** items, otherwise the shared **legacy** bank (`legacyQuizQuestions` in `project/js/data.js`)—all aligned to the art mission, not generic trivia. No backward navigation between questions. |
