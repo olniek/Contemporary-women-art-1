@@ -1231,12 +1231,12 @@ button:disabled {
   grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr));
   gap: var(--space-lg);
   margin: var(--space-lg) 0;
-  justify-items: stretch;
+  justify-items: center;
 }
 .artist-card-wrap {
   position: relative;
   width: 100%;
-  max-width: none;
+  max-width: 15rem;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -1343,10 +1343,14 @@ button:disabled {
   border-radius: var(--radius-ui);
   box-shadow: var(--shadow-apple);
 }
+.artist-card-front {
+  background: var(--color-accent-muted);
+}
 .artist-card-front img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center top;
   filter: saturate(0.55) contrast(1.05);
   display: block;
 }
