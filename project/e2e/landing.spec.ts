@@ -17,7 +17,7 @@ test("landing shows title and primary CTA", async ({ page }) => {
 
   const cta = page.locator("#btn-landing-cta");
   await expect(cta).toBeVisible();
-  await expect(cta).toHaveText("Start your first series");
+  await expect(cta).toHaveText("Begin");
 
   await cta.click();
   await expect(page.getByRole("button", { name: "Photography" })).toBeVisible();
@@ -25,7 +25,7 @@ test("landing shows title and primary CTA", async ({ page }) => {
 
 test("all curated media paths are visible and enabled", async ({ page }) => {
   await openApp(page);
-  await page.getByRole("button", { name: "Start your first series" }).click();
+  await page.getByRole("button", { name: "Begin" }).click();
 
   await expect(page.getByRole("button", { name: "Photography" })).toBeEnabled();
   await expect(page.getByRole("button", { name: "Painting" })).toBeEnabled();

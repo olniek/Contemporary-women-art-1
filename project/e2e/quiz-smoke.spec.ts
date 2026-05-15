@@ -4,7 +4,7 @@ import type { Page } from "@playwright/test";
 
 async function navigateToExploreGrid(page: Page) {
   await page.goto("/project/index.html");
-  await page.getByRole("button", { name: "Start your first series" }).click();
+  await page.getByRole("button", { name: "Begin" }).click();
   await page.getByRole("button", { name: "Photography" }).click();
   await page.getByRole("button", { name: "Start exploring" }).first().click();
   await page.locator(".artist-card").nth(0).click();

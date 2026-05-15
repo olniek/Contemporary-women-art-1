@@ -4,7 +4,7 @@ import type { Page } from "@playwright/test";
 
 async function navigateToExploreGrid(page: Page) {
   await page.goto("/project/index.html");
-  await page.getByRole("button", { name: "Start your first series" }).click();
+  await page.getByRole("button", { name: "Begin" }).click();
   await page.getByRole("button", { name: "Photography" }).click();
   await page.getByRole("button", { name: "Start exploring" }).first().click();
 }
@@ -31,7 +31,7 @@ test("first series and first topic reach artwork grid", async ({ page }) => {
 
 test("topics control which artwork cards appear", async ({ page }) => {
   await page.goto("/project/index.html");
-  await page.getByRole("button", { name: "Start your first series" }).click();
+  await page.getByRole("button", { name: "Begin" }).click();
   await page.getByRole("button", { name: "Photography" }).click();
   await page
     .getByRole("button", { name: "Start exploring" })
@@ -61,7 +61,7 @@ test("favorites screen ignores saved entries from disabled media", async ({
     );
   });
 
-  await page.getByRole("button", { name: "Start your first series" }).click();
+  await page.getByRole("button", { name: "Begin" }).click();
   await page.getByRole("button", { name: "Photography" }).click();
   await page.getByRole("button", { name: "Start exploring" }).first().click();
   await page.getByRole("button", { name: "See favorites" }).click();

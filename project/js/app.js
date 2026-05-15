@@ -440,13 +440,25 @@ function render() {
   if (state === "landing") {
     app.innerHTML = `
           <div class="landing">
-            <h1 class="landing-title" id="view-title" tabindex="-1">Learn contemporary art through women artists</h1>
-            <p class="landing-subtitle">5 artworks · 5 minutes · curated insight</p>
-            <figure class="landing-example">
-              <img src="../images/francesca-woodman-card.png" width="400" height="520" loading="lazy" alt="Black-and-white photograph: figure in a doorframe, arms raised." />
-              <figcaption><strong>Example insight.</strong> The doorway is both frame and burden—the pose keeps symbolic weight without leaving the room.</figcaption>
-            </figure>
-            <button type="button" class="landing-cta btn btn--primary" id="btn-landing-cta">Start your first series</button>
+            <div class="landing-hero">
+              <div class="landing-copy">
+                <p class="landing-kicker">A feminist learning room</p>
+                <h1 class="landing-title" id="view-title" tabindex="-1" aria-label="Learn contemporary art through women artists">
+                  <span class="landing-title-line">Learn contemporary art</span>
+                  <span class="landing-title-line landing-title-line--emph">through women artists</span>
+                </h1>
+                <p class="landing-tagline">Five artworks · five minutes · insight that names who made the work and why it matters.</p>
+                <div class="landing-actions">
+                  <button type="button" class="landing-cta btn btn--primary" id="btn-landing-cta">Begin</button>
+                </div>
+              </div>
+              <div class="landing-visual">
+                <figure class="landing-example">
+                  <img src="../images/francesca-woodman-card.png" width="400" height="520" loading="lazy" alt="Black-and-white photograph: figure in a doorframe, arms raised." />
+                  <figcaption><strong>Example insight.</strong> The doorway is both frame and burden—the pose keeps symbolic weight without leaving the room.</figcaption>
+                </figure>
+              </div>
+            </div>
           </div>
         `;
     document.getElementById("btn-landing-cta").onclick = () => {
@@ -461,17 +473,19 @@ function render() {
     const seriesButtons = seriesOptions
       .map(
         (s) => `
-          <div class="series-choice">
-            <button type="button" class="btn btn--secondary btn-series" data-series="${escapeHtml(s.id)}"${s.status === "coming-soon" ? " disabled" : ""}>${escapeHtml(s.label)}${s.status === "coming-soon" ? " · Coming soon" : ""}</button>
-            <p class="series-blurb">${escapeHtml(s.description)}</p>
+          <div class="series-card-wrap">
+            <button type="button" class="series-card btn-series" data-series="${escapeHtml(s.id)}"${s.status === "coming-soon" ? " disabled" : ""}>${escapeHtml(s.label)}${s.status === "coming-soon" ? " · Soon" : ""}</button>
+            <p class="series-card-blurb">${escapeHtml(s.description)}</p>
           </div>
         `
       )
       .join("");
     app.innerHTML = `
-          <h1 class="view-title" id="view-title" tabindex="-1">Choose a medium</h1>
-          <p class="series-blurb">Each path is a short, curated series—lens, surface, mass, or live time.</p>
-          ${seriesButtons}
+          <header class="view-header">
+            <h1 class="view-title" id="view-title" tabindex="-1">Choose a medium</h1>
+            <p class="view-lead">Each path is a short, curated series—lens, surface, mass, or live time.</p>
+          </header>
+          <div class="series-grid">${seriesButtons}</div>
         `;
     app.querySelectorAll(".btn-series").forEach((btn) => {
       btn.onclick = () => {
@@ -510,9 +524,11 @@ function render() {
       )
       .join("");
     app.innerHTML = `
-          <h1 class="view-title" id="view-title" tabindex="-1">${escapeHtml(sl)}</h1>
-          <p class="explore-topic-line topic-screen-lead">Choose a topic to explore</p>
-          ${panels || "<p>No topics for this series yet.</p>"}
+          <header class="view-header">
+            <h1 class="view-title" id="view-title" tabindex="-1">${escapeHtml(sl)}</h1>
+            <p class="view-lead">Choose a topic to explore</p>
+          </header>
+          <div class="topic-grid">${panels || "<p>No topics for this series yet.</p>"}</div>
           <p class="topic-nav-row"><button type="button" class="btn btn--secondary" data-topic-nav="back">Back</button></p>
         `;
     app.querySelectorAll("[data-topic-id]").forEach((btn) => {
@@ -640,13 +656,15 @@ function render() {
           </div>
         `;
     app.innerHTML = `
-          <h1 class="view-title" id="view-title" tabindex="-1">Explore the artworks</h1>
-          ${flowStepIndicator(1)}
-          <p class="series-blurb">${escapeHtml(seriesLabel)}${
+          <header class="view-header">
+            <h1 class="view-title" id="view-title" tabindex="-1">Explore the artworks</h1>
+            ${flowStepIndicator(1)}
+            <p class="view-lead series-blurb">${escapeHtml(seriesLabel)}${
             selectedTopic
               ? ` · <span class="explore-topic-title">${escapeHtml(selectedTopic.title)}</span>`
               : ""
           }</p>
+          </header>
           ${
             selectedTopic
               ? `<p class="explore-topic-line">${escapeHtml(selectedTopic.description)}</p>${selectedTopic.thesis ? `<p class="explore-thesis">${escapeHtml(selectedTopic.thesis)}</p>` : ""}`
@@ -863,7 +881,10 @@ function render() {
       })
       .join("");
     app.innerHTML = `
-          <h1 class="view-title" id="view-title" tabindex="-1">Your favorites</h1>
+          <header class="view-header">
+            <h1 class="view-title" id="view-title" tabindex="-1">Your favorites</h1>
+            <p class="view-lead">Works you saved with the heart—return anytime to compare notes.</p>
+          </header>
           ${parsed.length ? `<ul class="favorites-list">${listHtml}</ul>` : "<p>No favorites yet—tap the heart on a card to save one in this live path.</p>"}
           <div class="series-actions">
             <button type="button" class="btn btn--secondary" id="btn-favorites-back">Back</button>
@@ -902,9 +923,11 @@ function render() {
       )
       .join("");
     app.innerHTML = `
-          <h1 class="view-title" id="view-title" tabindex="-1">Quiz on the theme</h1>
-          ${flowStepIndicator(2)}
-          <p class="series-blurb">Choose the answer that fits best.</p>
+          <header class="view-header">
+            <h1 class="view-title" id="view-title" tabindex="-1">Quiz on the theme</h1>
+            ${flowStepIndicator(2)}
+            <p class="view-lead">Choose the answer that fits best.</p>
+          </header>
           <p class="quiz-hint">You can’t change an answer after you continue—there is no back button between questions.</p>
           <div class="quiz-stack">
             <p class="quiz-progress">Progress: ${n} of ${total}</p>
@@ -946,9 +969,11 @@ function render() {
     const n = questionIndex + 1;
     const ok = answers[questionIndex] === q.correctValue;
     app.innerHTML = `
-          <h1 class="view-title" id="view-title" tabindex="-1">Context for your choice</h1>
-          ${flowStepIndicator(2)}
-          <p class="series-blurb">Here’s a little context after your answer.</p>
+          <header class="view-header">
+            <h1 class="view-title" id="view-title" tabindex="-1">Context for your choice</h1>
+            ${flowStepIndicator(2)}
+            <p class="view-lead">Here’s a little context after your answer.</p>
+          </header>
           <div id="quiz-feedback-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
           <div class="quiz-stack">
             <p class="quiz-progress">Progress: ${n} of ${total}</p>
@@ -1059,9 +1084,11 @@ function render() {
       ? "Explore another topic"
       : "Review this topic";
     app.innerHTML = `
-          <h1 class="view-title" id="view-title" tabindex="-1">How you did</h1>
-          ${flowStepIndicator(3)}
-          <p class="series-blurb">A calm recap before you choose what to explore next.</p>
+          <header class="view-header">
+            <h1 class="view-title" id="view-title" tabindex="-1">How you did</h1>
+            ${flowStepIndicator(3)}
+            <p class="view-lead">A calm recap before you choose what to explore next.</p>
+          </header>
           <p class="result-score" id="line-score"></p>
           <div class="result-key-ideas" id="block-key-ideas"></div>
           ${learnedIdeasHtml}
@@ -1144,8 +1171,10 @@ function renderExhibition() {
       })
       .join("");
     app.innerHTML = `
-          <h1 class="view-title" id="view-title" tabindex="-1">Choose three works</h1>
-          <p class="series-blurb">Pick three artworks from this topic for your mini exhibition wall.</p>
+          <header class="view-header">
+            <h1 class="view-title" id="view-title" tabindex="-1">Choose three works</h1>
+            <p class="view-lead">Pick three artworks from this topic for your mini exhibition wall.</p>
+          </header>
           <p id="exhibition-pick-live" class="exhibition-live" aria-live="polite">${pickCount} of 3 selected</p>
           <div class="exhibition-picker" role="group" aria-labelledby="view-title">${pickCards}</div>
           <div class="series-actions exhibition-actions">
@@ -1212,8 +1241,10 @@ function renderExhibition() {
       })
       .join("");
     app.innerHTML = `
-          <h1 class="view-title" id="view-title" tabindex="-1">Order your wall</h1>
-          <p class="series-blurb">Left to right is how a visitor would encounter your three works.</p>
+          <header class="view-header">
+            <h1 class="view-title" id="view-title" tabindex="-1">Order your wall</h1>
+            <p class="view-lead">Left to right is how a visitor would encounter your three works.</p>
+          </header>
           <ol class="exhibition-order-list">${orderList}</ol>
           <div class="series-actions exhibition-actions">
             <button type="button" class="btn btn--secondary" id="btn-exhibition-back-pick">Back</button>
@@ -1249,8 +1280,10 @@ function renderExhibition() {
 
   if (exhibitionPhase === "title") {
     app.innerHTML = `
-          <h1 class="view-title" id="view-title" tabindex="-1">Title your exhibition</h1>
-          <p class="series-blurb">A short title frames how a visitor reads the three works together.</p>
+          <header class="view-header">
+            <h1 class="view-title" id="view-title" tabindex="-1">Title your exhibition</h1>
+            <p class="view-lead">A short title frames how a visitor reads the three works together.</p>
+          </header>
           <label class="exhibition-title-field" for="exhibition-title-input">
             <span class="exhibition-title-label">Exhibition title</span>
             <input type="text" id="exhibition-title-input" class="exhibition-title-input" maxlength="${EXHIBITION_TITLE_MAX}" placeholder="Staged belief under pressure" value="${escapeHtml(exhibitionTitle)}" />
@@ -1314,8 +1347,10 @@ function renderExhibition() {
       ? "Explore another topic"
       : "Review this topic";
     app.innerHTML = `
-          <h1 class="view-title" id="view-title" tabindex="-1">Your exhibition</h1>
-          <p class="series-blurb">A wall label for <strong>${escapeHtml(exhibitionTitle)}</strong>.</p>
+          <header class="view-header">
+            <h1 class="view-title" id="view-title" tabindex="-1">Your exhibition</h1>
+            <p class="view-lead">A wall label for <strong>${escapeHtml(exhibitionTitle)}</strong>.</p>
+          </header>
           <section class="exhibition-wall" aria-labelledby="exhibition-wall-heading">
             <h2 id="exhibition-wall-heading" class="exhibition-wall-title" tabindex="-1">${escapeHtml(exhibitionTitle)}</h2>
             <p class="exhibition-wall-text" id="exhibition-wall-text"></p>
