@@ -528,7 +528,7 @@ function render() {
           <div class="topic-panel">
             ${
               t.previewImage
-                ? `<img src="${escapeHtml(t.previewImage)}" alt="${escapeHtml(t.previewImageAlt || "")}" width="400" height="280" loading="lazy" />`
+                ? `<figure class="topic-panel-media"><img src="${escapeHtml(t.previewImage)}" alt="${escapeHtml(t.previewImageAlt || "")}" width="400" height="280" loading="lazy" /></figure>`
                 : ""
             }
             <h2>${escapeHtml(t.title)}</h2>
