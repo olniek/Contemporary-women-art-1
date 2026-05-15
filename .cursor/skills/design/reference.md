@@ -72,7 +72,7 @@ Heart / favorite controls use existing classes in main.css (grep `favorite`). Ke
 | Landing | `.landing`, `.landing-hero`, `.landing-example` |
 | Series selection | `.series-grid`, `.series-card-wrap`, `.series-card`, `.series-card--{id}`, `.series-card-icon`, `.series-card-svg`, `.series-card-label`, `.series-card-blurb` |
 | Topic selection | `.topic-grid`, `.topic-panel`, `.topic-panel-media` (reset `<figure>` margin to `0`) |
-| Artwork exploration | `.artist-grid`, `.artist-card`, favorites controls |
+| Artwork exploration | `.artist-grid`, `.artist-card`, `.artist-back-scroll`, `.artist-back-notebook`, favorites controls |
 | Quiz | `.quiz-stack`, `.quiz-progress`, `.quiz-option` |
 | Result | `.view--center`, score/result blocks in render templates |
 | Favorites | `.view-header`, empty state copy |

@@ -612,16 +612,19 @@ function render() {
                 </div>
                 <div class="artist-card-face artist-card-back">
                   <div class="artist-back-inner">
-                    <div class="artist-back-body">
-                      <h2 class="artist-back-name">${escapeHtml(artistDisplayName(a))}</h2>
-                      ${artistMetaLine(a) ? `<p class="artist-back-meta">${escapeHtml(artistMetaLine(a))}</p>` : ""}
-                      <p class="artist-back-desc">${escapeHtml(a.description)}</p>
-                      <hr class="artist-back-divider" />
-                      <div class="artist-back-insight-section">
-                        <p class="artist-key-label">Key insight</p>
-                        <p class="artist-back-insight">${escapeHtml(a.insight)}</p>
+                    <div class="artist-back-scroll">
+                      <div class="artist-back-body">
+                        <h2 class="artist-back-name">${escapeHtml(artistDisplayName(a))}</h2>
+                        ${artistMetaLine(a) ? `<p class="artist-back-meta">${escapeHtml(artistMetaLine(a))}</p>` : ""}
+                        <p class="artist-back-desc">${escapeHtml(a.description)}</p>
+                        <hr class="artist-back-divider" />
+                        <div class="artist-back-insight-section">
+                          <p class="artist-key-label">Key insight</p>
+                          <p class="artist-back-insight">${escapeHtml(a.insight)}</p>
+                        </div>
                       </div>
-                      <div class="artist-back-notebook" data-notebook-fav="${escapeHtml(fid)}">
+                    </div>
+                    <div class="artist-back-notebook" data-notebook-fav="${escapeHtml(fid)}">
                         <label class="artist-key-label" for="note-${escapeHtml(fid)}">Your notebook · What did you notice?</label>
                         <textarea id="note-${escapeHtml(fid)}" class="artist-note-input" rows="2" maxlength="${NOTE_MAX_LENGTH}" placeholder="One line: a detail, a question, a feeling…" data-note-fav="${escapeHtml(fid)}">${escapeHtml(noteText)}</textarea>
                         <div class="artist-note-meta">

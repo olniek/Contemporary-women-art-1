@@ -61,7 +61,7 @@ Each card includes:
 - Key insight (meaning)
 
 ### Interaction
-- **Implemented:** five artworks in a **grid**; **flip** a card to read description and key insight; **favorites** (hearts) optional. No quiz on this screen.
+- **Implemented:** five artworks in a **grid**; **flip** a card to read description and key insight; **notebook** field pinned at the bottom of the card back (scroll artist copy above); **favorites** (hearts) optional. No quiz on this screen.
 - **Quiz readiness:** Continue to quiz unlocks only after at least two cards have been flipped.
 - Focus on observation and interpretation
 
