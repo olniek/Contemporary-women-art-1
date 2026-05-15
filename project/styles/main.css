@@ -351,22 +351,6 @@ button:disabled {
   align-items: flex-start;
 }
 
-.landing-kicker {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: none;
-  color: var(--color-text);
-  margin: 0 0 1.25rem;
-  padding: 0.4rem 0.9rem;
-  border-radius: var(--radius-pill);
-  background: var(--color-lime);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-apple);
-}
-
 .landing-title {
   font-family: var(--font-display);
   margin: 0 0 1.25rem;
@@ -540,6 +524,8 @@ button:disabled {
 }
 
 .topic-panel {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-ui);
   padding: var(--space-md);
@@ -556,8 +542,8 @@ button:disabled {
 }
 .topic-panel img {
   width: 100%;
-  max-height: 12rem;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   display: block;
   margin-bottom: var(--space-sm);
   border-radius: var(--radius-md);
@@ -589,7 +575,7 @@ button:disabled {
   background: var(--color-accent-muted);
 }
 .topic-explore-cta {
-  margin-top: var(--space-xs);
+  margin-top: auto;
   min-height: 2.5rem;
 }
 
@@ -681,8 +667,8 @@ button:disabled {
 }
 .compare-item img {
   width: 4rem;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   border-radius: var(--radius-sm);
   filter: saturate(0.75);
 }
@@ -946,8 +932,8 @@ button:disabled {
 }
 .exhibition-pick img {
   width: 3.5rem;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   border-radius: var(--radius-sm);
   filter: grayscale(100%);
 }
@@ -994,8 +980,8 @@ button:disabled {
 }
 .exhibition-order-item img {
   width: 3.5rem;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   border-radius: var(--radius-sm);
   filter: grayscale(100%);
 }
@@ -1109,8 +1095,8 @@ button:disabled {
 }
 .exhibition-wall-work img {
   width: 3.5rem;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   border-radius: var(--radius-sm);
   filter: grayscale(100%);
 }
@@ -1243,7 +1229,7 @@ button:disabled {
 .artist-card-front img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   filter: saturate(0.55) contrast(1.05);
   display: block;
 }
